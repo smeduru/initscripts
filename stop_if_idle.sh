@@ -5,7 +5,7 @@ cat << 'EOF' > /usr/local/bin/stop_if_idle.sh
 THRESHOLD=5
 IDLE_TIME_LIMIT=300
 IDLE_COUNT=0
-INSTANCE_ID=$(CONTAINER_ID)
+#INSTANCE_ID=$(CONTAINER_ID)
 while true; do
     GPU_UTIL=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits)
     if [ "$GPU_UTIL" -lt "$THRESHOLD" ]; then
@@ -14,7 +14,8 @@ while true; do
         IDLE_COUNT=0
     fi
     if [ "$IDLE_COUNT" -ge "$IDLE_TIME_LIMIT" ]; then
-        vastai stop instance $INSTANCE_ID
+        #vastai stop instance $INSTANCE_ID
+        sudo shutdown -h now
         exit 0
     fi
     sleep 60
