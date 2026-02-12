@@ -7,7 +7,7 @@ IDLE_TIME_LIMIT=3600
 IDLE_COUNT=0
 CONTAINER_ID=$(echo ${VAST_CONTAINERLABEL} | awk -F. '{print $2}')
 while true; do
-    GPU_UTIL=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits)
+    GPU_UTIL=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | tr -d '[:space:]')
     if [ "$GPU_UTIL" -lt "$THRESHOLD" ]; then
         IDLE_COUNT=$((IDLE_COUNT + 60))
     else
