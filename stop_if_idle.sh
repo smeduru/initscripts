@@ -3,7 +3,7 @@
 cat << 'EOF' > /usr/local/bin/stop_if_idle.sh
 #!/bin/bash
 THRESHOLD=5
-IDLE_TIME_LIMIT=300
+IDLE_TIME_LIMIT=3600
 IDLE_COUNT=0
 CONTAINER_ID=$(echo ${VAST_CONTAINERLABEL} | awk -F. '{print $2}')
 while true; do
